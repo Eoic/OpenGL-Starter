@@ -35,7 +35,20 @@ download_and_unzip() {
         echo "Error: failed to unzip ${output_name}. Exiting."
         exit 1
     fi
-    
+
+    # Ask for confirmation if dependency already exists.
+    if [ -d "${output_name}" ]; then
+        echo "${output_name} directory already exists."
+        read -p "Do you want to overwrite it? (y/N) " choice
+
+        case "$choice" in 
+          y|Y ) echo "Overwriting ${output_name}...";;
+          * ) echo "Skipping ${output_name} download."; return;;
+        esac
+
+        rm -rf "${output_name}"
+    fi
+
     mv "${output_name}-${version}" "${output_name}"
 
     if [ $? -ne 0 ]; then
