@@ -16,5 +16,8 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Dependencies.
+vendor/**
+
 # Build.
 build/

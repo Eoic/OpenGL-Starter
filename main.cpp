@@ -1,9 +1,13 @@
 #include <iostream>
-#include <glad/glad.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 using std::cout, std::endl;
 
 int main() {
-    cout << "Hello world." << endl;
+    if (!glfwInit())
+		  return -1;
+
+    cout << "Success" << endl;
     return 0;
 }
