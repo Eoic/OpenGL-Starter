@@ -19,43 +19,43 @@ download_and_unzip() {
     local url=$1
     local output_name=$2
     local version=$3
-
+    
     echo "Downloading ${output_name}..."
     curl -fLo "${output_name}.zip" "${url}"
-
+    
     if [ $? -ne 0 ]; then
         echo "Error: failed to download ${output_name}. Exiting."
         exit 1
     fi
-
+    
     echo "Unzipping ${output_name}..."
     unzip -q "${output_name}.zip" && rm "${output_name}.zip"
-
+    
     if [ $? -ne 0 ]; then
         echo "Error: failed to unzip ${output_name}. Exiting."
         exit 1
     fi
-
+    
     # Ask for confirmation if dependency already exists.
     if [ -d "${output_name}" ]; then
         echo "${output_name} directory already exists."
         read -p "Do you want to overwrite it? (y/N) " choice
-
-        case "$choice" in 
-          y|Y ) echo "Overwriting ${output_name}...";;
-          * ) echo "Skipping ${output_name} download."; return;;
+        
+        case "$choice" in
+            y|Y ) echo "Overwriting ${output_name}...";;
+            * ) echo "Skipping ${output_name} download."; rm -rf "${output_name}-${version}"; return;;
         esac
-
+        
         rm -rf "${output_name}"
     fi
-
+    
     mv "${output_name}-${version}" "${output_name}"
-
+    
     if [ $? -ne 0 ]; then
         echo "Error: failed to rename ${output_name}-${version}. Exiting."
         exit 1
     fi
-
+    
     echo "${output_name} downloaded and unzipped successfully."
 }
 
