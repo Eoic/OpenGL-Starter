@@ -3,15 +3,17 @@
 
 #include <iostream>
 
+using std::cout, std::cerr, std::endl;
+
 void glfwErrorCallback(int error, const char* description) {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+    cerr << "GLFW Error (" << error << "): " << description << endl;
 }
 
 int main() {
     glfwSetErrorCallback(glfwErrorCallback);
 
     if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
+        cerr << "Failed to initialize GLFW" << endl;
         return -1;
     }
 
@@ -22,7 +24,7 @@ int main() {
     GLFWwindow* window = glfwCreateWindow(800, 600, "Hello GLEW and GLFW", NULL, NULL);
 
     if (!window) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
+        cerr << "Failed to create GLFW window" << endl;
         glfwTerminate();
         return -1;
     }
@@ -31,11 +33,11 @@ int main() {
     glewExperimental = GL_TRUE;
 
     if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
+        cerr << "Failed to initialize GLEW" << endl;
         return -1;
     }
 
-    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+    cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
 
     glClearColor(3.0f, 0.8f, 0.5f, 1.0f);
 
