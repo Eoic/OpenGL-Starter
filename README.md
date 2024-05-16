@@ -1,4 +1,4 @@
-# OpenGL template with C++
+# OpenGL starter project
 
 ### Features
 * Integration with VSCode.
