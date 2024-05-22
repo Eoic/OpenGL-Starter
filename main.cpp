@@ -20,6 +20,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     GLFWwindow* window = glfwCreateWindow(800, 600, "Hello GLEW and GLFW", NULL, NULL);
 
@@ -39,12 +40,11 @@ int main() {
 
     cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
 
-    glClearColor(3.0f, 0.8f, 0.5f, 1.0f);
-
     while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        glClearColor(3.0f, 0.8f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
     glfwDestroyWindow(window);
